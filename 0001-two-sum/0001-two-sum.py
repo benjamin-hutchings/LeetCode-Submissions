@@ -5,17 +5,11 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        numMap = {}
-        n = len(nums)
+        hashmap = {} # elements in array visited
 
-        # Build the hash table
-        for i in range(n):
-            numMap[nums[i]] = i
-
-        # Find the complement
-        for i in range(n):
-            complement = target - nums[i]
-            if complement in numMap and numMap[complement] != i:
-                return [i, numMap[complement]]
-
-        return []
+        for i, n in enumerate(nums):
+            diff = target - n
+            if diff in hashmap:
+                return [hashmap[diff], i]
+            hashmap[n] = i
+        return
